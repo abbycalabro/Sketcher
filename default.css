@@ -2,7 +2,7 @@ body {
 	background: url("http://casper-creations.com/wp-content/themes/responsive/core/images/bg-cloud.jpg");
 } 
 
-#random {
+#abby {
 	position: fixed;
 	z-index: -1;
 }
@@ -15,8 +15,8 @@ body {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: -120px;
-	border: 1px solid black;
+	margin-top: -130px;
+	border: 2px solid black;
 	border-radius: 10px;
 	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75)
 }
@@ -43,9 +43,6 @@ body {
 .squares {
 	display: inline-block;
 	float: left;
-	border: 1px solid black;
-	margin-left: -1px;
-	margin-bottom: -1px;
 	background: black;
 }
 
@@ -64,6 +61,11 @@ body {
 	position: relative;
 	margin-left: 160px;
 	top: 60px;
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75)
+}
+
+.button:hover, #container:hover {
+	cursor: pointer;
 }
 
 #clear {
@@ -75,10 +77,6 @@ body {
 	position: relative;
 }
 
-#Sketch {
+#sketch {
 	text-decoration: line-through;
-}
-
-.highlighted {
-	background: orange;
 }

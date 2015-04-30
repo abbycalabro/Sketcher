@@ -16,41 +16,12 @@ $(document).ready(function() {
 	});
 	
 	$("#clear").click(function() {
-		$("#container").empty();
-		generateGrid(newDimension);
+		$(".squares").css("background", "black");
 	});	
 });
 
-function makeNewPosition(){
-    // Get viewport dimensions (remove the dimension of the div)
-    var h = $(window).height() - 50;
-    var w = $(window).width() - 50;
-    var nh = Math.floor(Math.random() * h);
-    var nw = Math.floor(Math.random() * w);
-    return [nh,nw];    
-}
-
-function animateDiv(){
-    var newq = makeNewPosition();
-    var oldq = $('#random').offset();
-    var speed = calcSpeed([oldq.top, oldq.left], newq);
-    
-    $('#random').animate({ top: newq[0], left: newq[1] }, speed, function(){
-      animateDiv();        
-    });
-};
-
-function calcSpeed(prev, next) {
-    var x = Math.abs(prev[1] - next[1]);
-    var y = Math.abs(prev[0] - next[0]);
-    var greatest = x > y ? x : y;
-    var speedModifier = 0.15;
-    var speed = Math.ceil(greatest/speedModifier);
-    return speed;
-}
-
 var generateGrid = function(numSquares) {
-	var squareSize = 400 / numSquares;
+	var squareSize = (400 / numSquares).toFixed(10);
 	
 	for(var i = 0; i < numSquares * numSquares; i++) {
 		if(i % numSquares  === 0) {
@@ -63,13 +34,42 @@ var generateGrid = function(numSquares) {
 	//adjust squares to fit container
 	$(".squares").css("width", squareSize);
 	$(".squares").css("height", squareSize);
-		
+
 	highlight();
 };
 
 var highlight = function() {
 	$(".squares").hover(function() {
-		$(this).addClass("highlighted");	
+		var newColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+		$(this).css("background", newColor);	
 	});
 };
 
+//img functions
+function makeNewPosition(){
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    return [nh,nw];    
+}
+
+function animateDiv(){
+    var newq = makeNewPosition();
+    var oldq = $('#abby').offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    
+    $('#abby').animate({ top: newq[0], left: newq[1] }, speed, function(){
+      animateDiv();        
+    });
+};
+
+function calcSpeed(prev, next) {
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+    var greatest = x > y ? x : y;
+    var speedModifier = 0.15;
+    var speed = Math.ceil(greatest/speedModifier);
+    return speed;
+}
