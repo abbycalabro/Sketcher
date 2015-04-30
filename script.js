@@ -1,9 +1,11 @@
 $(document).ready(function() {
-	generateGrid(16);
+	var newDimension = 16;
+	generateGrid(newDimension);
+	animateDiv();
 
-	$("#button").click(function() {
+	$("#new").click(function() {
 		//get new grid dimensions
-		var newDimension = prompt("How many squares per row/column?");	
+		newDimension = prompt("How many squares per row/column?");	
 		
 		if(newDimension != null) {
 			//empty current grid
@@ -11,8 +13,41 @@ $(document).ready(function() {
 			//generate new grid
 			generateGrid(newDimension);
 		}
+	});
+	
+	$("#clear").click(function() {
+		$("#container").empty();
+		generateGrid(newDimension);
 	});	
 });
+
+function makeNewPosition(){
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    return [nh,nw];    
+}
+
+function animateDiv(){
+    var newq = makeNewPosition();
+    var oldq = $('#random').offset();
+    var speed = calcSpeed([oldq.top, oldq.left], newq);
+    
+    $('#random').animate({ top: newq[0], left: newq[1] }, speed, function(){
+      animateDiv();        
+    });
+};
+
+function calcSpeed(prev, next) {
+    var x = Math.abs(prev[1] - next[1]);
+    var y = Math.abs(prev[0] - next[0]);
+    var greatest = x > y ? x : y;
+    var speedModifier = 0.15;
+    var speed = Math.ceil(greatest/speedModifier);
+    return speed;
+}
 
 var generateGrid = function(numSquares) {
 	var squareSize = 400 / numSquares;
