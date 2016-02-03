@@ -5,13 +5,23 @@ $(document).ready(function() {
 
 	$("#new").click(function() {
 		//get new grid dimensions
-		newDimension = prompt("How many squares per row/column?");	
-		
-		if(newDimension != null) {
-			//empty current grid
-			$("#container").empty();
-			//generate new grid
-			generateGrid(newDimension);
+		newDimension = prompt("What dimension should the new grid be? Enter an integer between 1 and 100: ");	
+		newDimension = Number(newDimension);
+
+		//check that input is acceptable type and size
+		if(typeof newDimension === "number" && (newDimension % 1) === 0) {
+			if(newDimension > 0 && newDimension <=100) { 
+				//empty current grid
+				$("#container").empty();
+				//generate new grid
+				generateGrid(newDimension);
+			}
+			else {
+				alert("Oops! You didn't enter an integer between 1 and 100.");
+			}
+		}
+		else {
+			alert("Oops! You didn't enter an integer between 1 and 100.");
 		}
 	});
 	
