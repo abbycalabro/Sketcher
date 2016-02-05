@@ -5,8 +5,8 @@ $(document).ready(function() {
 
 	$("#new").click(function() {
 		//get new grid dimensions
-		newDimension = prompt("What dimension should the new grid be? Enter an integer between 1 and 100: ");	
-		newDimension = Number(newDimension);
+		response = prompt("What dimension should the new grid be? Enter an integer between 1 and 100: ");	
+		newDimension = Number(response);
 
 		//check that input is acceptable type and size
 		if(typeof newDimension === "number" && (newDimension % 1) === 0) {
